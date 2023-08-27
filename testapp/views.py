@@ -28,6 +28,28 @@ class MemberListView(ListView):
     model = Member
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) # はじめに継承元のメソッドを呼び出す
+
+        query = self.request.GET
+        q = query.get('q')
+        print(q)
+        if q != "":
+            context["init"] = query.get('q')
+        else:
+            context["init"] = ''
+
+        return context
+
+    def get_queryset(self, **kwargs):
+        queryset = super().get_queryset(**kwargs)
+        query = self.request.GET
+
+        if q := query.get('q'): #python3.8以降
+            queryset = queryset.filter(name__icontains=q)
+
+        return queryset
+
 class MemberUpdateView(UpdateView):
     model = Member
     fields = ('name', 'age')

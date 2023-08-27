@@ -1,4 +1,13 @@
+
+
+{% load replaceurl %} 
 <h1>Members</h1>
+
+<form class="d-flex" action="{% url 'list' %}" method="get">
+    <input name="q" value = "{{ init }}" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+</form>
+
 <ul>
 {% for member in object_list %}
     <li>
@@ -16,8 +25,8 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">« 最初のページ</a>
-            <a href="?page={{ page_obj.previous_page_number }}">前のページ</a>
+            <a href="?{% url_replace request 'page' 1 %}">« 最初のページ</a>
+            <a href="?{% url_replace request 'page' page_obj.previous_page_number %}">前のページ</a>
         {% endif %}
 
         <span class="current">
@@ -25,8 +34,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">次のページ</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">最後のページ »</a>
+            <a href="?{% url_replace request 'page' page_obj.next_page_number %}">次のページ</a>
+            <a href="?{% url_replace request 'page' page_obj.paginator.num_pages %}">最後のページ »</a>
         {% endif %}
     </span>
 </div>
