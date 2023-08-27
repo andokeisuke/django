@@ -48,6 +48,10 @@ class MemberListView(ListView):
             if name:
                 queryset = queryset.filter(name__icontains=name)
 
+            age = form.cleaned_data.get('age')
+            if isinstance(age, int):
+                queryset = queryset.filter(age=age)
+
         return queryset
 
 class MemberUpdateView(UpdateView):

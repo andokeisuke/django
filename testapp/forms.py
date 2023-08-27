@@ -9,5 +9,8 @@ class CreateForm(forms.ModelForm):
 
 # SearchFormクラスを定義
 class SearchForm(forms.Form):
-        name = forms.CharField(label='name', max_length=50,required = False,)
-        #age = forms.IntegerField(required = False)
+        name = forms.ModelChoiceField(Member.objects, label='name',
+                                     empty_label='選択してください',required = False)
+        
+        #name = forms.CharField(label='name', max_length=50,required = False,)
+        age = forms.IntegerField(required = False)
