@@ -2,7 +2,6 @@ from django.urls import path
 from . import views          
 
 urlpatterns = [
-    path("",views.Index.as_view(), name="Index"),
     path('create/', views.CommentCreateView.as_view(), name='create'),
     path('list/', views.CommentListView.as_view(), name='list'),
     path('<int:pk>/update/', views.CommentUpdateView.as_view(), name='update'),
