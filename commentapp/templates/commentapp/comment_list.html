@@ -1,0 +1,63 @@
+
+
+{% load replaceurl %} 
+<h1>comments</h1>
+
+{% if user.is_authenticated %}
+<div class="h2">Welcome {{ user.username }}</div>
+<a href="{% url 'logout' %}" class="btn btn-primary">logout</a>
+{% else %}
+<a href="{% url 'login' %}" class="btn btn-primary">login</a>
+<a href="{% url 'signup' %}" class="btn btn-primary">Signup</a>
+{% endif %}
+
+
+
+<form class="mt-2" id="search-form" action="" method="GET">
+    <div>
+        <label class="label mr-4">公開・非公開</label>
+        {{ search_form.is_public }}
+        <label class="label mr-4">作成者</label>
+        {{ search_form.create_user }}
+      </div>
+      <button class="btn btn-info ml-4" type="submit">検索</button>
+</form>
+
+
+<ul>
+{% for comment in object_list %}
+    <li>
+        {{ comment.date }} - {{ comment.title }} - {{ comment.create_user}}- {{ comment.get_is_public_display}}
+        {% if user.is_authenticated %}
+        {% if user.username == comment.create_user.username %}
+        <a href="{% url 'update' comment.pk %}">編集</a> <!-- 追加 -->
+        <a href="{% url 'delete' comment.pk %}">削除</a> <!-- 追加 -->
+        {% endif %}
+        {% endif %}
+        <a href="{% url 'detail' comment.pk %}">詳細</a> <!-- 追加 -->
+       
+
+    </li>
+{% empty %}
+    <li>データがありません</li>
+{% endfor %}
+<a href="{% url 'create' %}">登録ページ</a>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?{% url_replace request 'page' 1 %}">« 最初のページ</a>
+            <a href="?{% url_replace request 'page' page_obj.previous_page_number %}">前のページ</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?{% url_replace request 'page' page_obj.next_page_number %}">次のページ</a>
+            <a href="?{% url_replace request 'page' page_obj.paginator.num_pages %}">最後のページ »</a>
+        {% endif %}
+    </span>
+</div>

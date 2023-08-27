@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>タイトル</p>
+    <p>{{ object.title }}</p>
+    <p>本文</p>
+    <p>{{ object.text }}</p>
+    <p>作成者</p>
+    <p>{{ object.create_user }}</p>
+    <p>作成日</p>
+    <p>{{ object.date }}</p>
+    <p>公開・非公開</p>
+    <p>{{ object.get_is_public_display }}</p>
+<a href="{% url 'list' %}">戻る</a>
+</body>
+</html>
+

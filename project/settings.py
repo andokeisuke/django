@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'testapp',
+    #'testapp',
+    'commentapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,8 +66,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
 
-            'libraries': {
-                'replaceurl': 'testapp.templatetags.replaceurl' # 追記
+            #'libraries': {
+            #    'replaceurl': 'testapp.templatetags.replaceurl' # 追記
+            #}
+
+             'libraries': {
+                'replaceurl': 'commentapp.templatetags.replaceurl' # 追記
             }
         },
     },
