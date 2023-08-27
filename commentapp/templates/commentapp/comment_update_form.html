@@ -2,4 +2,5 @@
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="更新">
+    <a href="{% url 'list' %}" class="btn btn-primary">ホーム</a>
 </form>

@@ -1,48 +1,74 @@
 
 
 {% load replaceurl %} <!--テンプレートタグのロード-->
-<h1>comments</h1>
+<h1>commentアプリ</h1>
 
 <!--ログインユーザとゲストユーザで表示変更-->
 {% if user.is_authenticated %}<!--ログインユーザの場合-->
-<div class="h2">Welcome {{ user.username }}</div><!--ユーザ名を表示-->
-<a href="{% url 'logout' %}" class="btn btn-primary">logout</a><!--ログアウトボタン-->
+<h2>
+    <div class="h2">{{ user.username }}としてログイン<!--ユーザ名を表示-->
+    <a href="{% url 'logout' %}" class="btn btn-primary">logout</a><!--ログアウトボタン-->
+    </div>
+</h2>
 {% else %}<!--ゲストユーザの場合-->
-<a href="{% url 'login' %}" class="btn btn-primary">login</a><!--ログインボタン-->
-<a href="{% url 'signup' %}" class="btn btn-primary">Signup</a><!--サインアップボタン-->
+<h2>
+    <div class="h2">ゲストユーザとしてログイン<!--ユーザ名を表示-->
+    <a href="{% url 'login' %}" class="btn btn-primary">login</a><!--ログインボタン-->
+    <a href="{% url 'signup' %}" class="btn btn-primary">Signup</a><!--サインアップボタン-->
+</div>
+</h2>
+
 {% endif %}
 
 
 <!--検索フォーム-->
 <form class="mt-2" id="search-form" action="" method="GET">
     <div>
-        <label class="label mr-4">公開・非公開</label>
+        <label class="label mr-4">公開設定</label>
         {{ search_form.is_public }}
         <label class="label mr-4">作成者</label>
         {{ search_form.create_user }}
+        <button class="btn btn-info ml-4" type="submit">検索</button>
       </div>
-      <button class="btn btn-info ml-4" type="submit">検索</button>
+      
 </form>
 
 <!--一覧表-->
-<ul>
-{% for comment in object_list %}
-    <li>
-        {{ comment.date }} - {{ comment.title }} - {{ comment.create_user}}- {{ comment.get_is_public_display}}
-        {% if user.is_authenticated %}<!--ログインしているか-->
-        {% if user.username == comment.create_user.username %}<!--自分のデータのときに編集・削除ボタン表示-->
-        <a href="{% url 'update' comment.pk %}">編集</a> 
-        <a href="{% url 'delete' comment.pk %}">削除</a> 
-        {% endif %}
-        {% endif %}
-        <a href="{% url 'detail' comment.pk %}">詳細</a> 
-    </li>
-{% empty %}
+<table table border="1" style="border-collapse: collapse">
+    <tr>
+      <th>日付</th>
+      <th>タイトル</th>
+      <th>作成者</th>
+      <th>公開設定</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for comment in object_list %}
+    <tr>
+      <td>{{ comment.date }} </td>
+      <td>{{ comment.title }}</td>
+      <td>{{ comment.create_user}}</td>
+      <td>{{ comment.get_is_public_display}} </td>
+      {% if user.is_authenticated %}<!--ログインしているか-->
+      {% if user.username == comment.create_user.username %}<!--自分のデータのときに編集・削除ボタン表示-->
+      <td><a href="{% url 'update' comment.pk %}">編集</a>  </td>
+      <td><a href="{% url 'delete' comment.pk %}">削除</a> </td>
+      {% else %}<!--自分のデータではないとき編集・削除ボタン非表示-->
+      <td> </td>
+      <td></td>
+      {% endif %}
+      {% endif %}
+      <td><a href="{% url 'detail' comment.pk %}">詳細</a> </td>
+    </tr>
+    {% empty %}
     <li>データがありません</li>
-{% endfor %}
+    {% endfor %}
+  </table>
+
 
 <!--データ登録ボタン-->
-<a href="{% url 'create' %}">登録ページ</a>
+<a href="{% url 'create' %}">コメントの追加</a>
 
 <!--ページングボタン-->
 <div class="pagination">

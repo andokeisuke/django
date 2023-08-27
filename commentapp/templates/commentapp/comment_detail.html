@@ -6,15 +6,15 @@
     <title>Title</title>
 </head>
 <body>
-    <p>タイトル</p>
+    <b><p>タイトル</p></b>
     <p>{{ object.title }}</p>
-    <p>本文</p>
+    <b><p>本文</p></b>
     <p>{{ object.text }}</p>
-    <p>作成者</p>
+    <b><p>作成者</p></b>
     <p>{{ object.create_user }}</p>
-    <p>作成日</p>
+    <b><p>作成日</p></b>
     <p>{{ object.date }}</p>
-    <p>公開・非公開</p>
+    <b><p>公開設定</p></b>
     <p>{{ object.get_is_public_display }}</p>
 <a href="{% url 'list' %}">ホーム</a>
 </body>

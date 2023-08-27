@@ -1,5 +1,19 @@
 <form method="post">
     {% csrf_token %}
-    <p>データ "{{ object }}" を本当に削除しますか?</p>
-    <input type="submit" value="確定">
+    <p>タイトル "{{ object }}" を本当に削除しますか?</p>
+    <body>
+        <b><p>タイトル</p></b>
+        <p>{{ object.title }}</p>
+        <b><p>本文</p></b>
+        <p>{{ object.text }}</p>
+        <b><p>作成者</p></b>
+        <p>{{ object.create_user }}</p>
+        <b><p>作成日</p></b>
+        <p>{{ object.date }}</p>
+        <b><p>公開設定</p></b>
+        <p>{{ object.get_is_public_display }}</p>
+    
+    </body>
+    <input type="submit" value="削除">
+    <a href="{% url 'list' %}">ホーム</a>
 </form>
