@@ -2,11 +2,14 @@
 
 {% load replaceurl %} 
 <h1>Members</h1>
-
-<form class="d-flex" action="{% url 'list' %}" method="get">
-    <input name="q" value = "{{ init }}" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-primary" type="submit">Search</button>
+<form class="mt-2" id="search-form" action="" method="GET">
+    <div>
+        <label class="label mr-4">name</label>
+        {{ search_form.name }}
+      </div>
+      <button class="btn btn-info ml-4" type="submit">検索</button>
 </form>
+
 
 <ul>
 {% for member in object_list %}
