@@ -2,6 +2,17 @@
 
 {% load replaceurl %} 
 <h1>Members</h1>
+
+{% if user.is_authenticated %}
+<div class="h2">Welcome {{ user.username }}</div>
+<a href="{% url 'logout' %}" class="btn btn-primary">logout</a>
+{% else %}
+<a href="{% url 'login' %}" class="btn btn-primary">login</a>
+<a href="{% url 'signup' %}" class="btn btn-primary">Signup</a>
+{% endif %}
+
+
+
 <form class="mt-2" id="search-form" action="" method="GET">
     <div>
         <label class="label mr-4">name</label>

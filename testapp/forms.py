@@ -1,5 +1,7 @@
 from django import forms
 from .models import Member
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CreateForm(forms.ModelForm):
     class Meta:
@@ -14,3 +16,12 @@ class SearchForm(forms.Form):
         
         #name = forms.CharField(label='name', max_length=50,required = False,)
         age = forms.IntegerField(required = False)
+
+
+class SignupForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+class LoginForm(AuthenticationForm):
+    pass
