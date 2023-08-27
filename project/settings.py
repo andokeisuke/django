@@ -127,5 +127,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/login/'# 追記
-LOGIN_REDIRECT_URL = '/list/'# 追記
+LOGIN_URL = '/login/'# 追記 アクセス制限のあるページに入ったとき強制的にログイン画面に飛ばす
+LOGIN_REDIRECT_URL = '/list/'# 追記 
