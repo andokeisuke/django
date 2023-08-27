@@ -9,10 +9,12 @@
     <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
         {{ form.as_p }}
+        <!-- ゲストユーザで権限がない場合ログイン画面にリダイレクトされるが 、
+            入ろうとしたサイトのURLはNextに格納されログインが成功するとその場所にリダイレクトされる-->
         <p><input type="hidden" name="next" value="{{next}}"></p>
         <p><input type="submit" value="ログイン"></p>
     </form>
 
-    <a href="{% url 'signup' %}">サインアップ</a> <!-- 追加 -->
+    <a href="{% url 'signup' %}">サインアップ</a> 
 </body>
 </html>

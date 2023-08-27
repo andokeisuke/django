@@ -31,8 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'testapp',
-    'commentapp',
+    'commentapp',# 追記
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,10 +64,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-
-            #'libraries': {
-            #    'replaceurl': 'testapp.templatetags.replaceurl' # 追記
-            #}
 
              'libraries': {
                 'replaceurl': 'commentapp.templatetags.replaceurl' # 追記
@@ -113,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = 'ja'# 変更
 
-TIME_ZONE = 'Asia/Tokyo'
+TIME_ZONE = 'Asia/Tokyo'# 変更
 
 USE_I18N = True
 
@@ -132,5 +127,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/list/'
+LOGIN_URL = '/login/'# 追記
+LOGIN_REDIRECT_URL = '/list/'# 追記
